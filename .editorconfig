@@ -1,0 +1,145 @@
+# =============================================================================
+# Global EditorConfig for all projects under your home directory
+# Industry-standard defaults with extensive comments & language-specific rules
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# GLOBAL DEFAULTS
+# Applies to all files unless overridden by more specific rules below
+# -----------------------------------------------------------------------------
+
+# top-most EditorConfig file
+root = true
+
+[*]
+# Use UTF-8 as the default character encoding
+charset = utf-8
+# Use LF as the default line ending
+end_of_line = lf
+# Ensure files end with a newline
+insert_final_newline = true
+# Remove any trailing whitespace on save
+trim_trailing_whitespace = true
+# Use spaces for indentation
+indent_style = space
+# Default indentation size is 4 spaces
+indent_size = 4
+
+# -----------------------------------------------------------------------------
+# WINDOWS-SPECIFIC FILES
+# PowerShell scripts and batch files commonly require CRLF line endings
+# -----------------------------------------------------------------------------
+[{*.ps1,*.bat,*.cmd}]
+# Use CRLF line endings for Windows-specific files
+end_of_line = crlf
+
+# -----------------------------------------------------------------------------
+# PYTHON FILES
+# Follow PEP 8 style guide
+# -----------------------------------------------------------------------------
+[*.py]
+# Use spaces for indentation
+indent_style = space
+# 4 spaces per indentation level (PEP 8 standard)
+indent_size = 4
+# Maximum line length as recommended by PEP 8 (88 chars)
+max_line_length = 88
+
+# -----------------------------------------------------------------------------
+# SHELL SCRIPTS
+# Typical shell scripts use 2-space indentation
+# -----------------------------------------------------------------------------
+[*.sh]
+# Use spaces for indentation
+indent_style = space
+# 2 spaces per indentation level
+indent_size = 2
+
+# -----------------------------------------------------------------------------
+# WEB, JS, TS, DATA & CONFIG FILES
+# Industry standard is 2 spaces for readability
+# Combined file types for simpler config
+# -----------------------------------------------------------------------------
+[{*.yaml,*.yml,*.json,*.toml,*.xml,*.js,*.ts,*.jsx,*.tsx,*.vue,*.css,*.scss,*.less,*.html,*.mdx,*.ini}]
+# Use spaces for indentation
+indent_style = space
+# 2 spaces per indentation level
+indent_size = 2
+
+# -----------------------------------------------------------------------------
+# MARKDOWN FILES
+# Often preserve trailing whitespace (for tables, etc.)
+# -----------------------------------------------------------------------------
+[*.md]
+# Do not trim trailing whitespace in Markdown
+trim_trailing_whitespace = false
+# Use spaces for indentation
+indent_style = space
+# 2 spaces per indentation level
+indent_size = 2
+
+# -----------------------------------------------------------------------------
+# MAKEFILE
+# Makefiles require tabs for indentation
+# -----------------------------------------------------------------------------
+[Makefile]
+# Use tabs for indentation
+indent_style = tab
+
+# -----------------------------------------------------------------------------
+# DOCKERFILE
+# Standard convention is 2 spaces
+# -----------------------------------------------------------------------------
+[Dockerfile]
+# Use spaces for indentation
+indent_style = space
+# 2 spaces per indentation level
+indent_size = 2
+
+# -----------------------------------------------------------------------------
+# C / C++ / C# / JAVA FILES
+# Commonly use 4-space indentation in these languages
+# -----------------------------------------------------------------------------
+[{*.c,*.cpp,*.h,*.hpp,*.cs,*.java}]
+# Use spaces for indentation
+indent_style = space
+# 4 spaces per indentation level
+indent_size = 4
+
+# -----------------------------------------------------------------------------
+# GO FILES
+# Go uses tabs exclusively; `go fmt` enforces formatting
+# -----------------------------------------------------------------------------
+[*.go]
+# Use tabs for indentation
+indent_style = tab
+# Go assumes tab width equivalent to 8 spaces
+indent_size = 8
+
+# -----------------------------------------------------------------------------
+# SQL FILES
+# Standard indentation for SQL scripts
+# -----------------------------------------------------------------------------
+[*.sql]
+# Use spaces for indentation
+indent_style = space
+# 4 spaces per indentation level
+indent_size = 4
+# max_line_length omitted to allow unlimited line length
+
+# -----------------------------------------------------------------------------
+# MISC TEXT FILES
+# Plain text and CSV files
+# -----------------------------------------------------------------------------
+[*.txt]
+# Use spaces for indentation
+indent_style = space
+# 4 spaces per indentation level
+indent_size = 4
+
+[*.csv]
+# Do not trim trailing whitespace to avoid corrupting data
+trim_trailing_whitespace = false
+# Avoid inserting final newline, as some tools expect exact CSV format
+insert_final_newline = false
+
