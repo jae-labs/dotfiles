@@ -52,6 +52,7 @@ SYMLINK_TARGETS=(
   "Library/Application Support/Windsurf/User/settings.json"
   ".claude/CLAUDE.md"
   ".codeium/windsurf/memories/global_rules.md"
+  ".gemini/GEMINI.md"
 )
 SYMLINK_SOURCES=(
   ".zsh_kraft_completion"
@@ -83,6 +84,7 @@ SYMLINK_SOURCES=(
   ".aliases.d"
   ".vscode/settings.json"
   ".vscode/settings.json"
+  "CLAUDE.md"
   "CLAUDE.md"
   "CLAUDE.md"
 )
