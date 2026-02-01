@@ -1,0 +1,233 @@
+# Starship configuration schema URL for validation
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Main prompt format string.
+# Default: varies by modules enabled.
+format = """
+[](color_orange)\
+$os\
+$username\
+[](bg:color_yellow fg:color_orange)\
+$directory\
+[](fg:color_yellow bg:color_aqua)\
+$git_branch\
+$git_status\
+[](fg:color_aqua bg:color_blue)\
+$c\
+$cpp\
+$rust\
+$golang\
+$nodejs\
+$php\
+$java\
+$kotlin\
+$haskell\
+$python\
+[](fg:color_blue bg:color_bg3)\
+$docker_context\
+$conda\
+$pixi\
+[](fg:color_bg3 bg:color_bg1)\
+[ ](fg:color_bg1)\
+$line_break$character"""
+
+# Palette name to use.
+# Default: none (uses built-in colors).
+palette = 'gruvbox_dark'
+
+# Custom color palette definition.
+# Default: none.
+[palettes.gruvbox_dark]
+color_fg0 = '#fbf1c7'
+color_bg1 = '#3c3836'
+color_bg3 = '#665c54'
+color_blue = '#458588'
+color_aqua = '#689d6a'
+color_green = '#98971a'
+color_orange = '#d65d0e'
+color_purple = '#b16286'
+color_red = '#cc241d'
+color_yellow = '#d79921'
+
+# OS module: displays OS symbol.
+# Default: disabled=false, style="bg:color_orange fg:color_fg0".
+[os]
+disabled = false
+style = "bg:color_orange fg:color_fg0"
+
+# OS symbols for different systems.
+# Default: various symbols as shown.
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+AOSC = ""
+Arch = "󰣇"
+Artix = "󰣇"
+EndeavourOS = ""
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+Pop = ""
+
+# Username module: shows current user.
+# Default: show_always=false, style_user="fg:color_green", style_root="fg:color_red", format="[$user]($style)".
+[username]
+show_always = true
+style_user = "bg:color_orange fg:color_fg0"
+style_root = "bg:color_orange fg:color_fg0"
+format = '[ $user ]($style)'
+
+# Directory module: displays current directory.
+# Default: style="fg:color_cyan", format="[$path]($style)", truncation_length=3, truncation_symbol="…/".
+[directory]
+style = "fg:color_fg0 bg:color_yellow"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+# Directory substitutions for shortening paths.
+# Default: none.
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
+
+# Git branch module: shows current branch.
+# Default: symbol="", style="fg:color_purple", format="[$symbol $branch]($style)".
+[git_branch]
+symbol = ""
+style = "bg:color_aqua"
+format = '[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)'
+
+# Git status module: shows repository status.
+# Default: style="fg:color_green", format="[$all_status$ahead_behind]($style)".
+[git_status]
+style = "bg:color_aqua"
+format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)'
+
+# Node.js module: displays Node.js version.
+# Default: symbol="⬢", style="fg:color_green", format="[$symbol($version)]($style)".
+[nodejs]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+# C module: displays C compiler version.
+# Default: symbol="C", style="fg:color_green", format="[$symbol($version)]($style)".
+[c]
+symbol = " "
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+# C++ module: displays C++ compiler version.
+# Default: symbol="C++", style="fg:color_green", format="[$symbol($version)]($style)".
+[cpp]
+symbol = " "
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+# Rust module: displays Rust version.
+# Default: symbol="🦀", style="fg:color_red", format="[$symbol($version)]($style)".
+[rust]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+# Go module: displays Go version.
+# Default: symbol="🐹", style="fg:color_cyan", format="[$symbol($version)]($style)".
+[golang]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+# PHP module: displays PHP version.
+# Default: symbol="🐘", style="fg:color_purple", format="[$symbol($version)]($style)".
+[php]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+# Java module: displays Java version.
+# Default: symbol="☕", style="fg:color_red", format="[$symbol($version)]($style)".
+[java]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+# Kotlin module: displays Kotlin version.
+# Default: symbol="🅺", style="fg:color_blue", format="[$symbol($version)]($style)".
+[kotlin]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+# Haskell module: displays Haskell version.
+# Default: symbol="λ", style="fg:color_purple", format="[$symbol($version)]($style)".
+[haskell]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+# Python module: displays Python version.
+# Default: symbol="🐍", style="fg:color_yellow", format="[$symbol($version)]($style)".
+[python]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+# Docker context module: shows Docker context.
+# Default: symbol="🐳", style="fg:color_blue", format="[$symbol $context]($style)".
+[docker_context]
+symbol = ""
+style = "bg:color_bg3"
+format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
+
+# Conda module: displays Conda environment.
+# Default: style="fg:color_green", format="[$symbol($environment)]($style)".
+[conda]
+style = "bg:color_bg3"
+format = '[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)'
+
+# Pixi module: displays Pixi version and environment.
+# Default: style="fg:color_yellow", format="[$symbol($version)($environment)]($style)".
+[pixi]
+style = "bg:color_bg3"
+format = '[[ $symbol( $version)( $environment) ](fg:color_fg0 bg:color_bg3)]($style)'
+
+# Time module: shows current time.
+# Default: disabled=true, time_format="%R", style="fg:color_fg0", format="[$time]($style)".
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:color_bg1"
+format = '[[  $time ](fg:color_fg0 bg:color_bg1)]($style)'
+
+# Line break module: adds a line break.
+# Default: disabled=false.
+[line_break]
+disabled = false
+
+# Character module: displays prompt character.
+# Default: disabled=false, success_symbol="❯", error_symbol="❯", etc.
+[character]
+disabled = false
+success_symbol = '[](bold fg:color_green)'
+error_symbol = '[](bold fg:color_red)'
+vimcmd_symbol = '[](bold fg:color_green)'
+vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
+vimcmd_replace_symbol = '[](bold fg:color_purple)'
+vimcmd_visual_symbol = '[](bold fg:color_yellow)'
