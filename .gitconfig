@@ -1,0 +1,119 @@
+# [user] section: User identity for commits
+[user]
+    # Your name as it will appear in commits
+    # Default: unset, must be set for commits
+    name = Luiz F. C. Martins
+    # Your email for commits
+    # Default: unset, must be set for commits
+    email = "239121271+luiz1361@users.noreply.github.com"
+    # GPG/SSH key used to sign commits
+    # Default: unset, enables commit signing if set
+    signingkey = "~/.ssh/id_ed25519.pub"
+
+# [github] section: GitHub-specific settings
+[github]
+    # Your GitHub username
+    # Default: unset, used by some GitHub tools
+    user = luiz1361
+
+# [interactive] section: Interactive Git commands settings
+# diffFilter: Command to filter diffs in interactive commands
+# Default: unset
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+
+[help]
+    # Automatically correct mistyped Git commands;
+    # waits a short time before executing the corrected command
+    # Default: 0 (no automatic correction)
+    autocorrect = 1
+
+# [delta] section: Delta diff viewer settings
+# navigate: Enable navigation with n/N
+# Default: false
+[delta]
+    navigate = true  # use n and N to move between diff sections. Default is false.
+    dark = true      # or light = true, or omit for auto-detection. Default is auto.
+    side-by-side = true # show diffs side by side. Default is false.
+    line-numbers = true # show line numbers in the gutter. Default is false.
+    syntax-theme = Visual Studio Dark+ # choose your favorite syntax theme. Default is 'GitHub' theme.
+    hyperlinks = true # make file paths clickable links in supported terminals. Default is false.
+	file-style = bold yellow ul # style for file names in diffs. Default is plain.
+	file-decoration-style = yellow ol ul # decoration style for file names. Default is plain.
+	hunk-header-decoration-style = blue # decoration style for hunk headers. Default is plain.
+	hunk-header-line-number-style = purple bold # style for line numbers in hunk headers. Default is plain.
+
+# [merge] section: Merge conflict style settings
+# conflictStyle: Style for merge conflicts
+# Default: 'merge'
+[merge]
+    conflictStyle = zdiff3
+    # Include summaries of merged commits in newly created merge commit messages
+    # Default: false
+    log = true
+
+# [core] section: Core Git settings
+[core]
+    # Default pager for Git commands
+    # Default: less
+    pager = delta
+    # This is my global Git ignore file.
+    # Patterns here are applied to all repositories for this user.
+    # Repository-specific .gitignore files are still used and merged with these rules.
+    excludesfile = ~/.gitignore
+    # Default editor for Git commands
+    # Default: system editor, e.g., vi
+    editor = nvim
+    # Whitespace rules for git diff and apply
+    # Default: trailing-space
+    # space-before-tab: error for spaces before tabs at line start
+    # -indent-with-non-tab: disables error for non-tab indentation
+    # trailing-space: error for spaces at line end
+    whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
+# [pull] section: Behavior for git pull
+[pull]
+    # Use merge instead of rebase when pulling
+    # Default: false, i.e., merge
+    rebase = false
+
+# [init] section: Default branch name for new repos
+[init]
+    # Default branch name when initializing a repo
+    # Default: 'master'
+    defaultBranch = main
+
+# [gpg] section: GPG signing settings
+[gpg]
+    # Use SSH keys for commit signing
+    # Default: gpg, enables SSH signing
+    format = ssh
+
+# [commit] section: Commit signing settings
+[commit]
+    # Always sign commits
+    # Default: false, only signs if --gpg-sign is used
+    gpgsign = true
+    template = "~/.gitmessage"
+
+# [filter "lfs"] section: Git LFS (Large File Storage) settings
+[filter "lfs"]
+    # Command to run when checking out files
+    # Default: git-lfs smudge
+    smudge = git-lfs smudge -- %f
+    # Command to run for filtering files
+    # Default: git-lfs filter-process
+    process = git-lfs filter-process
+    # Require LFS filter for this repo
+    # Default: false
+    required = true
+    # Command to run when adding files
+    # Default: git-lfs clean
+    clean = git-lfs clean -- %f
+
+# [push] section: Behavior for git push
+[push]
+    # Automatically set the upstream branch when pushing for the first time
+    # Default: false
+    autoSetupRemote = true
+

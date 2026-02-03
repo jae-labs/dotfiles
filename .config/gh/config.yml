@@ -1,0 +1,40 @@
+# Specifies the version of the configuration schema.
+# Default: 1
+version: 1
+# Defines the protocol used for git operations (ssh or https).
+# Default: https
+git_protocol: https
+# Sets the editor for creating issues, pull requests, etc. If blank, uses environment variable.
+# Default: (blank)
+editor:
+# Controls interactive prompting globally. Cannot be overridden by hostname.
+# Default: enabled
+prompt: enabled
+# Prefers editor-based interactive prompting. Global config.
+# Default: disabled
+prefer_editor_prompt: disabled
+# Specifies a pager program for command output (e.g., "less"). Set to "cat" to disable.
+# Default: (blank)
+pager:
+# Defines aliases for gh commands.
+# Default: (empty)
+aliases:
+  co: pr checkout
+# Path to a Unix socket for HTTP connections. If blank, uses net/http.DefaultTransport.
+# Default: (blank)
+http_unix_socket:
+# Specifies the web browser for opening URLs. If blank, uses environment.
+# Default: (blank)
+browser:
+# Enables displaying labels with RGB hex colors in truecolor terminals.
+# Default: disabled
+color_labels: disabled
+# Enables customizable, 4-bit accessible colors.
+# Default: disabled
+accessible_colors: disabled
+# Enables an accessible prompter.
+# Default: disabled
+accessible_prompter: disabled
+# Enables an animated spinner for progress indication. If disabled, uses textual indicator.
+# Default: enabled
+spinner: enabled

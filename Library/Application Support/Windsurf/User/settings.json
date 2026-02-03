@@ -1,0 +1,157 @@
+{
+  //  ==================== Red Hat extension settings ====================
+  // Enables telemetry for Red Hat extensions, allowing data collection for improvement purposes.
+  // Default: true
+  "redhat.telemetry.enabled": false,
+
+  // ==================== Kubernetes extension settings ====================
+
+  // Settings for the VS Code Kubernetes extension
+  "vs-kubernetes": {
+    // Specifies the path to the kubectl executable.
+    // Default: Auto-detected or system PATH
+    "vs-kubernetes.kubectl-path": "/usr/local/bin/kubectl",
+    // Specifies the path to the Helm executable on macOS.
+    // Default: Auto-detected or system PATH
+    "vscode-kubernetes.helm-path-mac": "~/.vs-kubernetes/tools/helm/darwin-arm64/helm"
+  },
+
+  // ==================== Terminal settings ====================
+
+  // Automatically copies selected text in the integrated terminal to the clipboard.
+  // Default: false
+  "terminal.integrated.copyOnSelection": true,
+  // Sets the cursor style in the integrated terminal.
+  // Default: "block"
+  "terminal.integrated.cursorStyle": "line",
+  // Enables cursor blinking in the integrated terminal.
+  // Default: false
+  "terminal.integrated.cursorBlinking": true,
+  // Sets the font family for the integrated terminal.
+  // Default: "editor"
+  "terminal.integrated.fontFamily": "MesloLGS NF",
+  // Sets the font size for the integrated terminal.
+  // Default: 14
+  "terminal.integrated.fontSize": 14,
+
+  // ==================== Security settings ====================
+
+  // Determines how to handle untrusted files in the workspace.
+  // Default: "prompt"
+  "security.workspace.trust.untrustedFiles": "open",
+
+  // ==================== Update settings ====================
+
+  // Controls the update mode for VS Code.
+  // Default: "default"
+  "update.mode": "none",
+
+  // ==================== Workbench settings ====================
+
+  // Controls the hint shown in empty editors.
+  // Default: "text"
+  "workbench.editor.empty.hint": "hidden",
+  // Sets the icon theme for the workbench.
+  // Default: "vs-seti"
+  "workbench.iconTheme": "material-icon-theme",
+  // Sets the color theme for the workbench.
+  // Default: "Default Dark+"
+  "workbench.colorTheme": "Tokyo Night",
+
+  // ==================== Editor settings ====================
+
+  // Enables word wrapping in the editor.
+  // Default: "off"
+  "editor.wordWrap": "on",
+
+  // ==================== GitLens settings ====================
+
+  // Sets the AI model used by GitLens.
+  // Default: "openai"
+  "gitlens.ai.model": "vscode",
+  // Sets the VS Code AI model for GitLens.
+  // Default: "copilot:gpt-4"
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+
+  // ==================== Application settings ====================
+
+  // Sets the timeout for resolving shell environment variables.
+  // Default: 10
+  "application.shellEnvironmentResolutionTimeout": 20,
+
+  // ==================== GitHub Copilot settings ====================
+
+  // Enables next edit suggestions from GitHub Copilot.
+  // Default: true
+  "github.copilot.nextEditSuggestions.enabled": true,
+  // Enables GitHub Copilot for specific file types.
+  // Default: {"*": true, "plaintext": false, "markdown": true, "scminput": false}
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
+  },
+
+  // ==================== Git settings ====================
+
+  // Enables automatic fetching of Git repositories.
+  // Default: false
+  "git.autofetch": true,
+  // Replaces tags when pulling from Git.
+  // Default: false
+  "git.replaceTagsWhenPull": true,
+  // Enables smart commit features in Git.
+  // Default: false
+  "git.enableSmartCommit": true,
+  // Disables confirmation for Git sync operations.
+  // Default: true
+  "git.confirmSync": false,
+  // Always opens Git repositories in parent folders.
+  // Default: "never"
+  "git.openRepositoryInParentFolders": "always",
+
+  // ==================== Explorer settings ====================
+
+  // Disables confirmation dialog when deleting files in the explorer.
+  // Default: true
+  "explorer.confirmDelete": false,
+  // Disables confirmation for drag and drop in the explorer.
+  // Default: true
+  "explorer.confirmDragAndDrop": false,
+
+  // ==================== Chat/MCP settings ====================
+
+  // Disables confirmation for removing edit requests in chat.
+  // Default: true
+  "chat.editing.confirmEditRequestRemoval": false,
+  // Configures server sampling for MCP, specifying allowed models for specific contexts.
+  // Default: {}
+  "chat.mcp.serverSampling": {
+    "Global in Code: awslabs.aws-knowledge-mcp-server": {
+      "allowedModels": [
+        "copilot/gpt-4.1"
+      ]
+    }
+  },
+
+  // ==================== Ansible settings ====================
+
+  // Disables Ansible Lightspeed extension.
+  // Default: true
+  "ansible.lightspeed.enabled": false,
+  // Disables suggestions from Ansible Lightspeed.
+  // Default: true
+  "ansible.lightspeed.suggestions.enabled": false,
+  "chat.mcp.autostart": "newAndOutdated",
+  "editor.inlineSuggest.edits.showCollapsed": true,
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true
+  },
+  "chat.viewSessions.orientation": "stacked",
+  "workbench.startupEditor": "none",
+  "makefile.configureOnOpen": true,
+  "github.gitProtocol": "ssh",
+  "github-authentication.preferDeviceCodeFlow": true,
+  "claudeCode.preferredLocation": "sidebar"
+}
