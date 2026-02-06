@@ -1,3 +1,4 @@
+tap "dopplerhq/cli"
 tap "hashicorp/tap"
 tap "jae-labs/formulae"
 tap "localstack/tap"
@@ -336,6 +337,8 @@ brew "x86_64-elf-gcc"
 brew "yamlfmt"
 # UNIX shell (command interpreter)
 brew "zsh"
+# The official Doppler CLI for managing your secrets
+brew "dopplerhq/cli/doppler"
 # Terraform Language Server
 brew "hashicorp/tap/terraform-ls"
 # Cards Against the Void - AI-powered flashcards CLI
