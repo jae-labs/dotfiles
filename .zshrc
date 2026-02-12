@@ -61,9 +61,12 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # Define Oh My Zsh installation path (used by oh-my-zsh bootstrap scripts).
 export ZSH="$HOME/.oh-my-zsh"
 
-# Using starship instead of ZSH_THEME;
-# Default: oh-my-zsh theme: "robbyrussell"
-eval "$(starship init zsh)"
+# Check that the function `starship_zle-keymap-select()` is defined.
+# xref: https://github.com/starship/starship/issues/3418
+type starship_zle-keymap-select >/dev/null || \
+{
+  eval "$(starship init zsh)"
+}
 
 # ---- Oh-My-Zsh plugins configuration ----
 # The `plugins` array lists which Oh-My-Zsh plugins to load.
