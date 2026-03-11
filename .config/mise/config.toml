@@ -1,0 +1,145 @@
+[env]
+
+# Set default shell
+SHELL="/bin/zsh"
+
+# Keep Ansible output clean (no cows)
+ANSIBLE_NOCOWS=1
+
+# Global eza configuration directory.
+# Default: eza looks for its config files in ~/.config/eza.
+EZA_CONFIG_DIR="{{env.HOME}}/.config/eza"
+
+# Disable AWS CLI pager. So command output goes directly to the terminal instead of through 'less'.
+AWS_PAGER=""
+
+# Set terminal type to xterm-256color for full 256-color support in terminal apps; only needed if your terminal doesn't set it automatically.
+TERM="xterm-256color"
+
+# Set language and locale
+LANG="en_US.UTF-8" # Sets the default language and encoding for all programs.
+LANGUAGE="en_US:en" # Is used by GNU programs to determine the preferred message language.
+#export LC_ALL='en_US.UTF-8' # Should not be set permanently in your shell because it overrides all other locale settings. It’s better to set LC_ALL only temporarily in scripts or commands if needed.
+
+# Set default editor and visual editor to NeoVIM.
+# Default: usually vim or nano, but nvim offers more features and better performance.
+VISUAL="nvim"
+EDITOR="nvim"
+
+# Global Lefthook configuration file location.
+# Default: Lefthook looks for lefthook.yml in the current project directory.
+LEFTHOOK_CONFIG="{{env.HOME}}/.lefthook.yml"
+
+# Global Gitleaks configuration file location.
+# Default: Gitleaks looks for .gitleaks.toml in the current project directory.
+GITLEAKS_CONFIG="{{env.HOME}}/.gitleaks.toml"
+
+# Don’t clear the screen after quitting a manual page.
+MANPAGER='less -X'
+
+[tools]
+# IaC and Configuration management tools versions
+terraform = "1.13.4"
+terragrunt = "0.93.0"
+ansible = "12.2.0"
+
+# Programming languages and package management
+ruby = "4.0.1"
+node = "25.7.0"
+python = "3.14.3"
+go = "1.26.0"
+rust = "1.93.1"
+uv = "0.10.6"
+
+# Linters & LSPs
+"gem:rubocop" = "1.85.0"
+black = "26.1.0"
+tflint = "0.61.0"
+golangci-lint = "2.10.1"
+shellcheck = "0.11.0"
+shfmt = "3.12.0"
+"npm:bash-language-server" = "5.6.0"
+"npm:prettier" = "3.8.1"
+
+# Security
+"gem:brew-vulns" = "0.2.3"
+
+# SAST
+"pipx:semgrep" = "1.153.0"
+
+# Package managers
+npm = "11.11.0"
+"npm:yarn" = "1.22.22"
+pipx = "1.8.0"
+goreleaser = "2.14.1"
+
+# Cloud development and local emulators
+localstack = { version = "4.14.0", exe = "localstack" }
+
+# Performance testing
+wrk = "4.2.0"
+
+# Web testing
+"npm:playwright" = "1.58.0"
+
+# Misc
+cowsay = "1.6.0"
+
+# File management
+fd = "10.3.0"
+eza = "0.23.4"
+ripgrep = "15.1.0"
+zoxide = "0.9.9"
+yazi = "26.1.22"
+dust = "1.2.4"
+
+# Cloud
+aws = { version = "2.33.31", symlink_bins = "true" }
+oci = "3.74.2"
+gcloud = "558.0.0"
+
+# Containers and K8S
+k9s = "0.50.18"
+krew = "0.5.0"
+helm = "4.1.1"
+kubectl = "1.35.2"
+kubectx = "0.9.5"
+kustomize = "5.8.1"
+
+# AI
+gemini-cli = "0.30.0"
+"npm:@anthropic-ai/claude-code" = "2.1.71"
+"npm:skills" = "1.4.2"
+"npm:ccstatusline" = "2.0.29"
+
+# Password Managers
+"npm:@bitwarden/cli" = "2026.2.0"
+
+# Text Editors
+"aqua:neovim/neovim" = "0.11.6"
+
+# Parsers
+bat = "0.26.1"
+yq = "4.52.4"
+jq = "1.8.1"
+jless = "0.9.0"
+
+# Diff
+delta = "0.18.2"
+difftastic = "0.67.0"
+
+# Git
+lazygit = "0.59.0"
+lefthook = "2.1.1"
+gitleaks = "8.30.0"
+
+# Terminal
+tmux = "3.6a"
+gum = "0.17.0"
+
+# OS
+"cargo:procs" = "0.14.11"
+bottom = "0.12.3"
+
+# Databases
+sqlite = "3.51.2"
