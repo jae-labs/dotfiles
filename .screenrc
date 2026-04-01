@@ -1,0 +1,33 @@
+# Disable the startup message (suppress the welcome banner)
+# Default: on
+startup_message off
+
+# Set scrollback buffer size (in lines)
+# Default: 100
+defscrollback 32000
+
+# Enable UTF-8 by default for all new windows
+# Default: off
+defutf8 on
+
+# Display a hardstatus line at the bottom with host, window number, and title
+# %H = host, %n = window number, %t = title, %l = load average
+# Default: hardstatus is disabled
+hardstatus alwayslastline "%H | %n %t | %l"
+
+# Enable a visual bell instead of an audible beep
+# Default: off (audible bell)
+vbell on
+
+# Detach session automatically when the terminal disconnects
+# Default: off
+autodetach on
+
+# Do NOT kill (nuke) all windows automatically when the session ends
+# Default: off
+autonuke off
+
+# Window caption shown in the status line
+# Default: caption is disabled
+caption always "%3n %t"
+
