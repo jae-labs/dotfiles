@@ -103,6 +103,9 @@ oci = "3.83.0"
 gcloud = "569.0.0"
 vultr-cli= "3.10.0"
 
+# Monitoring
+"aqua:grafana/gcx" = "v0.3.0"
+
 # Containers and K8S
 k9s = "0.50.18"
 krew = "0.5.0"
