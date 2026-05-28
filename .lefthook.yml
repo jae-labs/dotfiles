@@ -1,0 +1,10 @@
+# Top-level key defining the pre-commit Git hook configuration
+pre-commit:
+  # Section for specifying commands to run during the pre-commit hook
+  commands:
+    # Name of the command (gitleaks, a tool for detecting secrets in code)
+    gitleaks:
+      # The shell command to execute: runs gitleaks in protect mode on staged files with verbose output
+      run: gitleaks protect --staged --verbose
+      # Tags associated with this command, here indicating it's related to security checks
+      tags: security

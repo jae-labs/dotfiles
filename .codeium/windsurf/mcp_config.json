@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "io.windsurf/context7": {
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@1.0.31"
+      ],
+      "command": "npx",
+      "registry": "io.windsurf/context7"
+    }
+  }
+}
