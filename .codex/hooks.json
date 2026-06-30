@@ -1,0 +1,34 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay -v 0.5 ~/.codex/hooks/sound-packs/session-start.wav"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay -v 0.5 ~/.codex/hooks/sound-packs/prompt-submit.wav"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay -v 0.5 ~/.codex/hooks/sound-packs/stop.wav"
+          }
+        ]
+      }
+    ]
+  }
+}
