@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample HTML File</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <nav class="navigation">
+            <div class="nav-brand">
+                <img src="logo.png" alt="Company Logo" class="logo">
+                <h1>Sample Website</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h2 class="hero-title">Welcome to Our Sample Website</h2>
+                <p class="hero-description">
+                    This is a sample HTML file with various elements for testing HTML linting and formatting.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="showAlert('Primary button clicked!')">
+                        Get Started
+                    </button>
+                    <button class="btn btn-secondary" onclick="showAlert('Secondary button clicked!')">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>About Us</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>
+                            We are a company that specializes in creating amazing web experiences.
+                            This section contains various HTML elements that might trigger linting issues.
+                        </p>
+                        <ul class="feature-list">
+                            <li>Responsive design</li>
+                            <li>Modern web technologies</li>
+                            <li>User-friendly interfaces</li>
+                            <li>Fast performance</li>
+                        </ul>
+                    </div>
+                    <div class="about-image">
+                        <img src="about-image.jpg" alt="About us image" width="400" height="300">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services-section">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services-grid">
+                    <article class="service-card">
+                        <h3>Web Development</h3>
+                        <p>Creating modern, responsive websites using the latest technologies.</p>
+                        <a href="#" class="service-link">Learn more →</a>
+                    </article>
+                    <article class="service-card">
+                        <h3>Mobile Apps</h3>
+                        <p>Developing native and cross-platform mobile applications.</p>
+                        <a href="#" class="service-link">Learn more →</a>
+                    </article>
+                    <article class="service-card">
+                        <h3>UI/UX Design</h3>
+                        <p>Designing beautiful and intuitive user interfaces.</p>
+                        <a href="#" class="service-link">Learn more →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <form class="contact-form" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="test-section">
+            <h2>HTML Elements for Testing</h2>
+
+            <!-- Elements with potential issues -->
+            <div class="test-elements">
+                <!-- Missing alt attribute -->
+                <img src="test.jpg">
+
+                <!-- Deprecated attributes -->
+                <table border="1" cellpadding="5" cellspacing="0">
+                    <tr>
+                        <th>Header 1</th>
+                        <th>Header 2</th>
+                    </tr>
+                    <tr>
+                        <td>Cell 1</td>
+                        <td>Cell 2</td>
+                    </tr>
+                </table>
+
+                <!-- Inline styles (should be avoided) -->
+                <div style="color: red; font-size: 16px; background: yellow;">
+                    This div has inline styles
+                </div>
+
+                <!-- Non-standard elements -->
+                <marquee>This is a marquee tag (deprecated)</marquee>
+                <blink>This is a blink tag (deprecated)</blink>
+                <center>This center tag is deprecated</center>
+
+                <!-- Empty elements -->
+                <div></div>
+                <span></span>
+                <p></p>
+
+                <!-- Nested quotes issue -->
+                <p title="This is a "title" with quotes">Content with quotes in title</p>
+
+                <!-- Unclosed tags (intentional for testing) -->
+                <p>This paragraph is not closed
+                <div>This div is also not closed
+
+                <!-- Duplicate IDs -->
+                <div id="duplicate-id">First element with duplicate ID</div>
+                <div id="duplicate-id">Second element with duplicate ID</div>
+
+                <!-- Invalid nesting -->
+                <p>
+                    <div>This div is inside a paragraph (invalid)</div>
+                </p>
+
+                <!-- Accessibility issues -->
+                <button onclick="doSomething()">Click me without aria-label</button>
+                <input type="text" placeholder="Enter text" />
+
+                <!-- Missing form labels -->
+                <input type="email" name="email" />
+                <input type="password" name="password" />
+
+                <!-- Invalid attributes -->
+                <div invalid-attr="value">Invalid attribute</div>
+                <span data-unknown="test">Unknown data attribute</span>
+
+                <!-- Broken links -->
+                <a href="">Empty link</a>
+                <a href="javascript:void(0)">JavaScript link</a>
+
+                <!-- Table without headers -->
+                <table>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                    </tr>
+                </table>
+
+                <!-- Image without dimensions -->
+                <img src="large-image.jpg" alt="Large image">
+
+                <!-- Form without proper structure -->
+                <form>
+                    <input type="text">
+                    <button>Submit</button>
+                </form>
+
+                <!-- Heading order issues -->
+                <h3>Skipping H2</h3>
+                <h1>Back to H1 after H3</h1>
+                <h4>Jumping to H4</h4>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Sample Website. All rights reserved.</p>
+            <nav class="footer-nav">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#sitemap">Sitemap</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript functions for testing
+        function showAlert(message) {
+            alert(message);
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            console.log('Form submitted:', data);
+            showAlert('Form submitted successfully!');
+        }
+
+        // DOM manipulation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

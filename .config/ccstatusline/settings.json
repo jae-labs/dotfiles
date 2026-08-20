@@ -1,0 +1,117 @@
+{
+  "version": 3,
+  "lines": [
+    [
+      {
+        "id": "f2f7f7ba-3af8-479d-8247-39d107f1e248",
+        "type": "custom-text",
+        "customText": "Duration: ",
+        "merge": "no-padding"
+      },
+      {
+        "id": "5",
+        "type": "session-clock",
+        "rawValue": true
+      },
+      {
+        "id": "cfa823eb-a9aa-49e4-95fe-dcb3acf2ee3a",
+        "type": "custom-text",
+        "customText": "Cost: ",
+        "merge": "no-padding"
+      },
+      {
+        "id": "6",
+        "type": "session-cost",
+        "rawValue": true
+      }
+    ],
+    [
+      {
+        "id": "6bc42cdd-8cce-4ea2-9cfc-48908b15f2ae",
+        "type": "tokens-input"
+      },
+      {
+        "id": "f7e3c96b-971c-4d4d-b4b6-d88260ed0165",
+        "type": "tokens-output"
+      },
+      {
+        "id": "c1000000-0000-4000-8000-000000000001",
+        "type": "custom-text",
+        "customText": "Ctx: ",
+        "merge": "no-padding"
+      },
+      {
+        "id": "c1000000-0000-4000-8000-000000000002",
+        "type": "context-length",
+        "rawValue": true,
+        "merge": "no-padding"
+      },
+      {
+        "id": "c1000000-0000-4000-8000-000000000003",
+        "type": "custom-text",
+        "customText": " / ",
+        "merge": "no-padding"
+      },
+      {
+        "id": "c1000000-0000-4000-8000-000000000004",
+        "type": "context-window",
+        "rawValue": true,
+        "merge": "no-padding"
+      },
+      {
+        "id": "c1000000-0000-4000-8000-000000000005",
+        "type": "custom-text",
+        "customText": " (",
+        "merge": "no-padding"
+      },
+      {
+        "id": "c1000000-0000-4000-8000-000000000006",
+        "type": "context-percentage",
+        "rawValue": true,
+        "merge": "no-padding"
+      },
+      {
+        "id": "c1000000-0000-4000-8000-000000000007",
+        "type": "custom-text",
+        "customText": ")"
+      }
+    ],
+    [
+      {
+        "id": "1d6e9016-46f7-473b-817c-79d80732384c",
+        "type": "model"
+      },
+      {
+        "id": "f1101c61-a12b-4ecc-839b-2d45a76f02ab",
+        "type": "git-branch"
+      },
+      {
+        "id": "a8f5d7e5-59d2-4a11-b42d-3d64d45fd5a7",
+        "type": "git-changes"
+      },
+      {
+        "id": "ab535b5b-5108-4869-8605-18205ed0d4b6",
+        "type": "version"
+      }
+    ]
+  ],
+  "flexMode": "full-minus-40",
+  "compactThreshold": 60,
+  "colorLevel": 3,
+  "inheritSeparatorColors": false,
+  "globalBold": false,
+  "powerline": {
+    "enabled": true,
+    "separators": [
+      "\ue0b0"
+    ],
+    "separatorInvertBackground": [
+      false
+    ],
+    "startCaps": [],
+    "endCaps": [],
+    "autoAlign": false,
+    "theme": "gruvbox"
+  },
+  "defaultPadding": " "
+}
