@@ -1,0 +1,137 @@
+{
+  "env": {
+    "CONTEXT7_API_KEY": "",
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
+    "CLAUDE_CODE_ENHANCED_TELEMETRY_BETA": "1",
+    "OTEL_METRICS_EXPORTER": "otlp",
+    "OTEL_LOGS_EXPORTER": "otlp",
+    "OTEL_TRACES_EXPORTER": "otlp",
+    "OTEL_METRIC_EXPORT_INTERVAL": "10000",
+    "OTEL_LOGS_EXPORT_INTERVAL": "5000",
+    "OTEL_EXPORTER_OTLP_ENDPOINT": "http://localhost:4317",
+    "OTEL_EXPORTER_OTLP_PROTOCOL": "grpc",
+    "OTEL_SERVICE_NAME": "claude-code",
+    "OTEL_RESOURCE_ATTRIBUTES": "service.name=claude-code",
+    "OTEL_LOG_TOOL_DETAILS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "WebFetch",
+      "WebSearch",
+      "EnterPlanMode",
+      "ExitPlanMode",
+      "Agent",
+      "AskUserQuestion",
+      "ListMcpResourcesTool",
+      "ReadMcpResourceTool",
+      "Skill",
+      "TaskGet",
+      "TaskList",
+      "TaskOutput",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "mcp__plugin_context7_context7__query-docs",
+      "mcp__claude_ai_Linear__list_*",
+      "mcp__claude_ai_Linear__get_*",
+      "mcp__claude_ai_Linear__search_*",
+      "mcp__claude_ai_Notion__notion-search",
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__claude_ai_Notion__notion-get-*"
+    ],
+    "ask": [
+      "Bash(sudo *)",
+      "Bash(chmod 777 *)",
+      "Bash(chmod -R 777*)",
+      "Bash(git config --global *)",
+      "Bash(git push --force*)",
+      "Bash(git push * --force*)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean -f*)",
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf ~*)",
+      "Bash(curl * | bash*)",
+      "Bash(curl * | sh*)",
+      "Bash(wget * | bash*)",
+      "Bash(wget * | sh*)",
+      "Bash(eval *)",
+      "Bash(mkfs*)",
+      "Bash(dd *)",
+      "Bash(shutdown*)",
+      "Bash(reboot*)",
+      "Bash(terraform apply*)",
+      "Bash(terraform destroy*)",
+      "Bash(aws *)",
+      "Bash(circleci *)",
+      "Bash(rwx *)",
+      "Bash(kubectl *)",
+      "Bash(helm *)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(*.env)",
+      "Read(*.pem)",
+      "Read(./secrets/**)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)"
+    ],
+    "defaultMode": "plan"
+  },
+  "model": "sonnet",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay -v 0.5 ~/.claude/hooks/sound-packs/session-start.wav"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay -v 0.5 ~/.claude/hooks/sound-packs/prompt-submit.wav"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay -v 0.5 ~/.claude/hooks/sound-packs/notification.wav"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay -v 0.5 ~/.claude/hooks/sound-packs/stop.wav"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "$HOME/.claude/statusline.sh",
+    "padding": 0,
+    "refreshInterval": 2
+  },
+  "enabledPlugins": {
+    "context7@claude-plugins-official": true
+  },
+  "outputStyle": "Concise",
+  "effortLevel": "high",
+  "autoMemoryEnabled": false,
+  "theme": "dark",
+  "tui": "fullscreen"
+}
