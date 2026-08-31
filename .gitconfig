@@ -90,8 +90,10 @@
     # Default: gpg, enables SSH signing
     format = ssh
 
+# Use a wrapper script that delegates to 1Password's op-ssh-sign if available,
+# otherwise falls back to the default ssh-keygen signing
 [gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+    program = "~/.local/bin/git-ssh-sign"
 
 # [commit] section: Commit signing settings
 [commit]

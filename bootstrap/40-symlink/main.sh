@@ -50,6 +50,7 @@ SYMLINK_DEFINITIONS=(
   "ansible.cfg"
   "dialogrc"
   ".aliases.d"
+  ".local/bin/git-ssh-sign"
   "Library/Application Support/Code/User/settings.json"
   ".claude/settings.json"
   ".claude/settings.json"
