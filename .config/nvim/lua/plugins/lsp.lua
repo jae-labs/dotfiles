@@ -45,4 +45,46 @@ return {
       end, 1000)
     end,
   },
+
+  -- Terraform LSP: Enabled for all projects except those with the OCI provider
+  -- The oracle/oci provider is massive (~250 MB binary, 7 MB schema) and causes
+  -- terraform-ls initialization/indexing to freeze Neovim.
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        terraformls = {},
+      },
+      setup = {
+        terraformls = function(_, opts)
+          -- Return true so LazyVim / mason-lspconfig doesn't auto-enable terraformls globally
+          vim.api.nvim_create_autocmd("FileType", {
+            pattern = { "terraform", "terraform-vars" },
+            group = vim.api.nvim_create_augroup("terraformls_conditional_start", { clear = true }),
+            callback = function(ev)
+              local fname = vim.api.nvim_buf_get_name(ev.buf)
+              if not fname or fname == "" then
+                return
+              end
+              local normalized = vim.fs.normalize(fname)
+              local root = vim.fs.root(ev.buf, { ".terraform", ".git" })
+
+              -- Skip if OCI provider is present in the workspace .terraform directory
+              if root and vim.uv.fs_stat(root .. "/.terraform/providers/registry.terraform.io/oracle") then
+                return
+              end
+
+              -- Otherwise, start terraformls for this buffer
+              vim.lsp.start(vim.tbl_extend("keep", opts or {}, {
+                name = "terraformls",
+                cmd = { "terraform-ls", "serve" },
+                root_dir = root or vim.fs.dirname(normalized),
+              }), { bufnr = ev.buf })
+            end,
+          })
+          return true
+        end,
+      },
+    },
+  },
 }
