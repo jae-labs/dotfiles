@@ -202,8 +202,8 @@ fi
 #############################################
 # EXTRA ALIASES untracked
 #############################################
-source "$HOME/.zshrc_extra"
-source "$HOME/.aliases_extra"
+[[ -f "$HOME/.zshrc_extra" ]] && source "$HOME/.zshrc_extra"
+[[ -f "$HOME/.aliases_extra" ]] && source "$HOME/.aliases_extra"
 
 ### Zsh Profiling
 # To profile zsh startup, uncomment the zmodload/zprof line at the top and uncomment `zprof` below:
