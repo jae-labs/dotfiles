@@ -149,4 +149,5 @@ bottom = "0.12.3"
 sqlite = "3.53.2"
 
 [settings]
+auto_install = true
 idiomatic_version_file_enable_tools = ["go", "node", "python", "uv", "awscli", "terraform"]
