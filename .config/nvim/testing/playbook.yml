@@ -1,0 +1,200 @@
+---
+# Sample Ansible playbook for testing ansible-lint and ansiblels
+
+- name: Sample Web Server Setup
+  hosts: webservers
+  become: true
+  vars:
+    app_name: "sample-web-app"
+    app_user: "webapp"
+    app_port: 3000
+    node_version: "18"
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+      when: ansible_os_family == "Debian"
+
+    - name: Install required packages using deprecated command module
+      command: apt-get install -y curl wget git vim htop
+      when: ansible_os_family == "Debian"
+      # Missing become
+
+    - name: Install packages with shell (should use package module)
+      shell: |
+        if command -v apt-get >/dev/null 2>&1; then
+          apt-get update && apt-get install -y curl wget git vim htop
+        elif command -v yum >/dev/null 2>&1; then
+          yum install -y curl wget git vim htop
+        fi
+      args:
+        creates: /usr/bin/curl
+
+    - name: Create application user
+      user:
+        name: "{{ app_user }}"
+        shell: /bin/bash
+        home: "/home/{{ app_user }}"
+        create_home: yes
+        state: present
+
+    - name: Create application directory
+      file:
+        path: "/opt/{{ app_name }}"
+        state: directory
+        owner: "{{ app_user }}"
+        group: "{{ app_user }}"
+        mode: '0755'
+
+    - name: Install Node.js using shell (should use better module)
+      shell: |
+        curl -fsSL https://deb.nodesource.com/setup_{{ node_version }}.x | bash -
+        apt-get install -y nodejs
+      args:
+        creates: /usr/bin/node
+      when: ansible_os_family == "Debian"
+      # Missing error handling
+
+    - name: Install PM2 globally without checking if already installed
+      npm:
+        name: pm2
+        global: yes
+        state: present
+      # Missing when condition
+
+    - name: Copy application files without backup
+      copy:
+        src: files/app/
+        dest: "/opt/{{ app_name }}/"
+        owner: "{{ app_user }}"
+        group: "{{ app_user }}"
+        mode: '0644'
+        # Missing backup parameter
+      notify:
+        - Restart application
+
+    - name: Install application dependencies without checking package.json
+      npm:
+        path: "/opt/{{ app_name }}"
+        state: present
+        production: true
+      become_user: "{{ app_user }}"
+      # Missing when condition for package.json existence
+
+    - name: Create PM2 ecosystem file
+      template:
+        src: templates/ecosystem.config.js.j2
+        dest: "/opt/{{ app_name }}/ecosystem.config.js"
+        owner: "{{ app_user }}"
+        group: "{{ app_user }}"
+        mode: '0644'
+      notify:
+        - Restart application
+
+    - name: Setup systemd service for PM2
+      template:
+        src: templates/pm2.service.j2
+        dest: "/etc/systemd/system/pm2-{{ app_name }}.service"
+        mode: '0644'
+      notify:
+        - Reload systemd
+        - Enable PM2 service
+
+    - name: Configure firewall with deprecated ufw module
+      ufw:
+        rule: allow
+        port: "{{ app_port }}"
+        proto: tcp
+        state: enabled
+      when: ansible_os_family == "Debian"
+      # Should use ufw module with proper parameters
+
+    - name: Create backup script with unsafe permissions
+      template:
+        src: templates/backup.sh.j2
+        dest: "/usr/local/bin/backup-{{ app_name }}.sh"
+        mode: '0777'  # Too permissive
+        owner: root
+        group: root
+      # Missing validation
+
+    - name: Setup cron job for backups without validation
+      cron:
+        name: "Backup {{ app_name }}"
+        job: "/usr/local/bin/backup-{{ app_name }}.sh"
+        minute: "0"
+        hour: "2"
+        user: root
+        state: present
+        # Missing backup and validation
+
+  handlers:
+    - name: Restart application
+      command: pm2 restart ecosystem.config.js
+      args:
+        chdir: "/opt/{{ app_name }}"
+      become_user: "{{ app_user }}"
+
+    - name: Reload systemd
+      systemd:
+        daemon_reload: yes
+
+    - name: Enable PM2 service
+      systemd:
+        name: "pm2-{{ app_name }}"
+        enabled: yes
+        state: started
+
+- name: Database Setup
+  hosts: databases
+  become: true
+  vars:
+    db_name: "sample_db"
+    db_user: "app_user"
+    db_password: "{{ vault_db_password }}"
+
+  tasks:
+    - name: Install PostgreSQL
+      package:
+        name:
+          - postgresql
+          - postgresql-contrib
+          - python3-psycopg2
+        state: present
+
+    - name: Start and enable PostgreSQL service
+      systemd:
+        name: postgresql
+        enabled: yes
+        state: started
+
+    - name: Create database
+      postgresql_db:
+        name: "{{ db_name }}"
+        state: present
+      become_user: postgres
+
+    - name: Create database user
+      postgresql_user:
+        name: "{{ db_user }}"
+        password: "{{ db_password }}"
+        db: "{{ db_name }}"
+        priv: "ALL"
+        state: present
+      become_user: postgres
+
+    - name: Configure PostgreSQL authentication
+      template:
+        src: templates/pg_hba.conf.j2
+        dest: "/etc/postgresql/*/main/pg_hba.conf"
+        mode: '0644'
+      notify:
+        - Restart PostgreSQL
+
+  handlers:
+    - name: Restart PostgreSQL
+      systemd:
+        name: postgresql
+        state: restarted
