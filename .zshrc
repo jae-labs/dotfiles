@@ -15,6 +15,9 @@
 export GPG_TTY=$(tty)               # default: GPG_TTY unset (no explicit TTY assigned)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
+# Disable SAM CLI Telemetry
+SAM_CLI_TELEMETRY=0
+
 # Make builds parallelized by default.
 # This sets MAKEFLAGS to use one more than the number of CPU cores; many Makefiles will respect it.
 # Note: On macOS, `nproc` may not be available; consider `sysctl -n hw.ncpu` if you see issues.
