@@ -23,9 +23,9 @@ _awssm_persist() {
 
 # Reapply the last profile/region chosen via `awssm`, if any.
 _awssm_reapply() {
-  local selector=$(aws configure get awssm_selector --profile default 2>/dev/null)
+  local selector=$(_awssm_config_get awssm_selector)
   [[ -n "$selector" ]] || return 0
-  local region=$(aws configure get region --profile default 2>/dev/null)
+  local region=$(_awssm_config_get region)
   export AWS_DEFAULT_REGION="$region"
   export AWS_REGION="$region"
   if [[ "$selector" == *:* ]]; then
@@ -37,8 +37,37 @@ _awssm_reapply() {
     unset AWS_SESSION_TOKEN
     unset ${(k)parameters[(I)AWS_SSO*]} 2>/dev/null
     export AWS_PROFILE="$selector"
-    eval $(aws configure export-credentials --format env) 2>/dev/null
+    _awssm_load_cached_creds "$selector"
   fi
+}
+
+# Read a key from the [default] profile in ~/.aws/config directly, skipping the
+# ~250ms interpreter-startup cost of shelling out to `aws configure get`.
+_awssm_config_get() {
+  awk -v key="$1" '
+    /^\[default\]/ { in_default=1; next }
+    /^\[/ { in_default=0 }
+    in_default && $1 == key { print $3; exit }
+  ' ~/.aws/config
+}
+
+# Cache exported credentials on disk, trusting the cache until its embedded
+# AWS_CREDENTIAL_EXPIRATION is actually close to expiring (no fixed TTL) —
+# avoids re-invoking the aws CLI (~250ms startup) on every shell start.
+_awssm_load_cached_creds() {
+  local selector="$1"
+  local cache_file="$HOME/.cache/awssm/${selector}.env"
+  mkdir -p "${cache_file:h}"
+  if [[ -f "$cache_file" ]]; then
+    local expiry=$(awk -F= '/AWS_CREDENTIAL_EXPIRATION/{print $2}' "$cache_file")
+    local expiry_epoch=$(date -j -u -f "%Y-%m-%dT%H:%M:%S" "${expiry%%+*}" +%s 2>/dev/null)
+    if [[ -n "$expiry_epoch" ]] && (( expiry_epoch - $(date +%s) > 300 )); then
+      source "$cache_file"
+      return
+    fi
+  fi
+  aws configure export-credentials --format env --profile "$selector" > "$cache_file" 2>/dev/null
+  source "$cache_file"
 }
 
 # Set AWS Profile and Region interactively.
