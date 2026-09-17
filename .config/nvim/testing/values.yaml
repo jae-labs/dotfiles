@@ -1,0 +1,364 @@
+# Sample Helm values file for testing
+# This file contains various issues for testing Helm linters
+
+# Global settings with potential issues
+global:
+  # Missing description
+  imageRegistry: "docker.io"
+  imagePullSecrets: []
+  storageClass: ""
+  # Trailing space
+  # Duplicate key
+  imageRegistry: "ghcr.io"
+
+# Replica count with type issues
+replicaCount: "3"  # Should be number, not string
+
+# Image configuration with issues
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  tag: "1.21.0"
+  # Deprecated field
+  pullSecrets: ""  # Should be array, not string
+  # Missing required fields
+  # Should include digest for security
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# Service account configuration with issues
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+  # Missing automountServiceAccountToken
+
+podAnnotations: {}
+  # Missing app.kubernetes.io annotations
+  # Should include version and management labels
+  # Missing security annotations
+
+# Pod security context with issues
+podSecurityContext:
+  fsGroup: 2000
+  # Missing runAsUser and runAsGroup
+  # Should include security policies
+
+# Container security context with issues
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+  # Missing runAsGroup
+  # Should include seccompProfile
+
+# Service configuration with issues
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: http
+  # Missing annotations
+  # Should include health check configuration
+
+# Ingress configuration with deprecated fields
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx  # Deprecated annotation
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: sample.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: sample-tls
+      hosts:
+        - sample.example.com
+  # Missing ingressClassName (newer field)
+  # Should include proper TLS configuration
+
+# Resources with potential issues
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  # Missing ephemeral-storage limits
+  # Should include resource profiles
+
+# Autoscaling with issues
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+  # Missing behavior policies
+  # Missing scaleUpPeriod and scaleDownPeriod
+
+# Node selector with issues
+nodeSelector:
+  kubernetes.io/os: linux
+  # Should include specific node labels
+  # Missing architecture constraints
+
+# Tolerations with issues
+tolerations: []
+  # Should include specific tolerations for taints
+  # Missing effect and operator specifications
+
+# Affinity with issues
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/name
+            operator: In
+            values:
+            - sample-app
+        topologyKey: kubernetes.io/hostname
+  # Missing requiredDuringSchedulingIgnoredDuringExecution
+  # Should include preferredDuringSchedulingIgnoredDuringExecution
+
+# Config map with issues
+configMap:
+  enabled: true
+  data:
+    APP_ENV: "production"
+    LOG_LEVEL: "info"
+    API_URL: "https://api.example.com"
+  # Missing annotations
+  # Missing binaryData for binary files
+  # Should include environment-specific configs
+
+# Secret with issues
+secret:
+  enabled: true
+  data:
+    DATABASE_URL: "postgresql://user:pass@db:5432/app"  # Should be base64 encoded
+    JWT_SECRET: "your-jwt-secret-here"  # Should be base64 encoded
+  # Missing type specification
+  # Should use stringData for plain text
+  # Missing secret management best practices
+
+# Persistence with issues
+persistence:
+  enabled: true
+  storageClass: "fast-ssd"
+  accessMode: ReadWriteOnce
+  size: 10Gi
+  # Missing annotations
+  # Missing volumeMode
+  # Should include selector and volumeName
+  # Missing backup configuration
+
+# Monitoring with issues
+monitoring:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    interval: 30s
+    path: /metrics
+    port: http
+    # Missing namespace, labels, annotations
+    # Missing scrapeTimeout and honorLabels
+  # Missing prometheusRule
+  # Should include Grafana dashboards
+
+# Readiness probe with issues
+readinessProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 1
+  failureThreshold: 3
+  # Missing scheme and host
+  # Missing successThreshold
+  # Should include proper thresholds
+
+# Liveness probe with issues
+livenessProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 15
+  periodSeconds: 20
+  timeoutSeconds: 1
+  failureThreshold: 3
+  # Missing scheme and host
+  # Missing successThreshold
+  # Should include proper thresholds
+  # Missing startup probe
+
+# Startup probe with issues
+startupProbe:
+  enabled: false
+  httpGet:
+    path: /startup
+    port: http
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 1
+  failureThreshold: 30
+  # Missing scheme and host
+  # Missing successThreshold
+  # Should be enabled for slow-starting applications
+
+# Environment variables with issues
+env:
+  - name: NODE_ENV
+    value: "production"
+  - name: LOG_LEVEL
+    value: "info"
+  - name: PORT
+    value: "8080"
+  # Missing environment-specific configs
+  # Should include secret references
+  # Missing validation patterns
+
+# Volume mounts with issues
+volumeMounts:
+  - name: config
+    mountPath: /app/config
+    readOnly: true
+  - name: logs
+    mountPath: /app/logs
+    readOnly: false
+  # Missing subPath
+  # Should include proper permissions
+
+# Volumes with issues
+volumes:
+  - name: config
+    configMap:
+      name: app-config
+  - name: logs
+    emptyDir: {}
+  # Missing persistent volume claims
+  # Should include proper storage classes
+  # Missing access modes
+
+# Init containers with issues
+initContainers:
+  - name: init-db
+    image: busybox:1.35
+    command: ['sh', '-c', 'until nc -z db 3306; do sleep 1; done']
+    resources:
+      limits:
+        cpu: 100m
+        memory: 64Mi
+      requests:
+        cpu: 50m
+        memory: 32Mi
+  # Missing security context
+  # Should include proper image pull policies
+  # Missing volume mounts
+
+# Sidecars with issues
+sidecars:
+  - name: log-shipper
+    image: fluent/fluent-bit:1.9
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
+    volumeMounts:
+      - name: logs
+        mountPath: /app/logs
+  # Missing security context
+  # Should include proper configuration
+  # Missing health checks
+
+# Pod labels with issues
+podLabels:
+  app: sample-application
+  version: "1.0.0"
+  managed-by: Helm
+  # Missing kubernetes.io labels
+  # Should include environment and component labels
+  # Missing part-of label
+
+# Deployment strategy with issues
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 25%
+    maxSurge: 25%
+  # Missing partition and revisionHistoryLimit
+  # Should include proper pause settings
+  # Missing pod disruption budget
+
+# Horizontal Pod Autoscaler with issues
+hpa:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+  # Missing behavior policies
+  # Missing scale policies
+  # Missing metrics configuration
+
+# Pod Disruption Budget with issues
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 1
+  maxUnavailable: 0
+  # Missing both minAvailable and maxUnavailable validation
+  # Should include proper selector
+  # Missing unhealthy pod eviction policy
+
+# Network policies with issues
+networkPolicy:
+  enabled: false
+  ingress: []
+  egress: []
+  # Missing podSelector
+  # Should include proper traffic rules
+  # Missing namespace selector
+
+# Pod priority with issues
+priorityClassName: ""
+  # Should include proper priority class
+  # Missing preemption policy
+
+# Pod topology spread constraints with issues
+topologySpreadConstraints: []
+  # Missing maxSkew and topologyKey
+  # Should include proper spread constraints
+  # Missing node affinity
+
+# Pod termination grace period
+terminationGracePeriodSeconds: 30
+  # Should be configurable
+  # Missing lifecycle hooks
+
+# Pod restart policy
+restartPolicy: Always
+  # Missing validation for different deployment types
+  # Should include proper error handling
+
+# Invalid YAML syntax - missing colon after key
+invalid_key_without_colon "value"
+
+# Another syntax error - unclosed quote
+bad_key: "unclosed string value
+
+# Trailing space here
