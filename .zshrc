@@ -53,6 +53,9 @@ export PATH="${HOME}/.krew/bin:$PATH"
 export PATH="${HOME}/.local/bin:$PATH"
 export PATH="${HOME}/.antigravity-ide/antigravity-ide/bin:$PATH"
 
+# ---- opencode ----
+export PATH="${HOME}/.opencode/bin:$PATH"
+
 # ---- iTerm2 Shell Integration ----
 # Source iTerm2 shell integration script if installed to get features like highlighted selection, prompt info, etc.
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -211,3 +214,5 @@ fi
 ### Zsh Profiling
 # To profile zsh startup, uncomment the zmodload/zprof line at the top and uncomment `zprof` below:
 #zprof
+
+
