@@ -214,5 +214,3 @@ fi
 ### Zsh Profiling
 # To profile zsh startup, uncomment the zmodload/zprof line at the top and uncomment `zprof` below:
 #zprof
-
-
